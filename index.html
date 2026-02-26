@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skycast — Weather App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated canvas background -->
+  <canvas id="skyCanvas"></canvas>
+
+  <div class="page">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">SKYCΑST</div>
+      <div class="tagline">// atmospheric conditions</div>
+    </header>
+
+    <!-- Search -->
+    <section class="search-section">
+      <div class="search-box">
+        <span class="search-icon">◎</span>
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Enter city name…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="searchBtn" onclick="searchWeather()">
+          <span>FETCH</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="api-notice">
+        ⚙ Add your free API key from
+        <a href="https://openweathermap.org/api" target="_blank">openweathermap.org</a>
+        in <code>app.js</code> · Sample data shown below ↓
+      </div>
+    </section>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+      <div class="loader-ring"></div>
+      <span>Fetching conditions…</span>
+    </div>
+
+    <!-- Error -->
+    <div class="error-bar" id="errorBar">
+      <span class="error-icon">⚠</span>
+      <span id="errorText">City not found. Check spelling and try again.</span>
+    </div>
+
+    <!-- =============================================
+         WEATHER CARD — pre-filled with sample data
+         ============================================= -->
+    <main class="weather-card visible" id="weatherCard">
+
+      <div class="card-top">
+        <div class="location-block">
+          <h1 class="city" id="cityName">London</h1>
+          <div class="location-meta">
+            <span class="country" id="countryName">GB</span>
+            <span class="dot">·</span>
+            <span class="local-time" id="localTime">14:32</span>
+          </div>
+        </div>
+        <div class="condition-block">
+          <div class="weather-emoji" id="weatherEmoji">⛅</div>
+          <div class="condition-label" id="conditionLabel">Partly Cloudy</div>
+        </div>
+      </div>
+
+      <div class="temp-display">
+        <span class="temp-big" id="tempBig">14</span>
+        <div class="temp-meta">
+          <span class="temp-unit">°C</span>
+          <span class="feels" id="feelsLike">feels 11°</span>
+          <span class="temp-range" id="tempRange">↑17° ↓9°</span>
+        </div>
+      </div>
+
+      <div class="divider-line"></div>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-icon">💧</div>
+          <div class="stat-body">
+            <div class="stat-val" id="humidity">78%</div>
+            <div class="stat-lbl">Humidity</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">💨</div>
+          <div class="stat-body">
+            <div class="stat-val" id="windSpeed">19.4 km/h</div>
+            <div class="stat-lbl">Wind</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">👁</div>
+          <div class="stat-body">
+            <div class="stat-val" id="visibility">8.0 km</div>
+            <div class="stat-lbl">Visibility</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">🌡</div>
+          <div class="stat-body">
+            <div class="stat-val" id="pressure">1012 hPa</div>
+            <div class="stat-lbl">Pressure</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">🌅</div>
+          <div class="stat-body">
+            <div class="stat-val" id="sunrise">06:48</div>
+            <div class="stat-lbl">Sunrise</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">🌇</div>
+          <div class="stat-body">
+            <div class="stat-val" id="sunset">17:55</div>
+            <div class="stat-lbl">Sunset</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      Powered by OpenWeatherMap API &nbsp;·&nbsp; Skycαst © 2026
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
